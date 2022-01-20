@@ -5,8 +5,8 @@ pyrosim.Start_SDF("box.sdf")
 
 #set size of cube
 length = 1
-width = 1
-height = 1
+width = 2
+height = 3
 
 # parameters for the box
 pyrosim.Send_Cube(name="Box", pos=[0, 0, 0.5], size=[length, width, height])
