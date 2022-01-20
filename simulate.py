@@ -8,7 +8,7 @@ p.setAdditionalSearchPath(pybullet_data.getDataPath())
 
 p.setGravity(0, 0, -9.8)
 # reads in world described in box.sdf
-p.loadSDF("box.sdf")
+p.loadSDF("boxes.sdf")
 planeId = p.loadURDF("plane.urdf")
 
 # for loop to make simulation last longer
