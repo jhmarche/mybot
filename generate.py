@@ -13,10 +13,13 @@ x = 0
 y = 0
 z = 0.5
 
-# parameters for the box
+# creates a tower of boxes that get smaller as they get higher
 for i in range(10):
     pyrosim.Send_Cube(name="Box", pos=[x, y, z], size=[length, width, height])
-    z = z+1
+    z += height
+    length *= 0.9
+    width *= 0.9
+    height *= 0.9
 
 # stop pyrosim
 pyrosim.End()
