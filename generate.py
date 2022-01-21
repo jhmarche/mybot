@@ -19,14 +19,14 @@ def create_robot():
     pyrosim.Start_URDF("body.urdf")
 
     # create torso for robot
-    pyrosim.Send_Cube(name="Torso", pos=[0, 0, 0.5], size=[1, 1, 1])
+    pyrosim.Send_Cube(name="Link0", pos=[0, 0, 0.5], size=[1, 1, 1])
 
     # create a joint for the torso and leg to connect
-    pyrosim.Send_Joint(name="Torso_Leg", parent="Torso", child="Leg",
-                       type="revolute", position=[0.5, 0, 1])
+    pyrosim.Send_Joint(name="Link0_Link1", parent="Link0", child="Link1",
+                       type="revolute", position=[0, 0, 0.5])
 
     # create a leg for robot
-    pyrosim.Send_Cube(name="Leg", pos=[1, 0, 1.5], size=[1, 1, 1])
+    pyrosim.Send_Cube(name="Link1", pos=[0, 0, 1], size=[1, 1, 1])
 
     # stop pyrosim
     pyrosim.End()
