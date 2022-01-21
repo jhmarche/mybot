@@ -14,8 +14,9 @@ y = 0
 z = 0.5
 
 # parameters for the box
-pyrosim.Send_Cube(name="Box", pos=[x, y, z], size=[length, width, height])
-pyrosim.Send_Cube(name="Box2", pos=[1, 0, 1.5], size=[length, width, height])
+for i in range(10):
+    pyrosim.Send_Cube(name="Box", pos=[x, y, z], size=[length, width, height])
+    z = z+1
 
 # stop pyrosim
 pyrosim.End()
