@@ -11,6 +11,8 @@ p.setGravity(0, 0, -9.8)
 p.loadSDF("world.sdf")
 planeId = p.loadURDF("plane.urdf")
 
+robotId = p.loadURDF("body.urdf")
+
 # for loop to make simulation last longer
 for x in range(1000):
     p.stepSimulation()
