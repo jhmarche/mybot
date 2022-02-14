@@ -24,23 +24,27 @@ backLegSensorValues = numpy.zeros(1000)
 # vector for frontleg sensor values
 frontLegSensorValues = numpy.zeros(1000)
 
+targetAngles = numpy.linspace(0, 2*numpy.pi, 1001)
+numpy.save("../mybot/data/targetAngles.npy", targetAngles)
+
+exit()
 # for loop to make simulation last longer
-for x in range(1000):
+for i in range(1000):
     p.stepSimulation()
-    backLegSensorValues[x] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
-    frontLegSensorValues[x] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
+    backLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
+    frontLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
     pyrosim.Set_Motor_For_Joint(
         bodyIndex=robotId,
         jointName="Torso_BackLeg",
         controlMode=p.POSITION_CONTROL,
-        targetPosition=random.uniform(-1.57079632679,1.57079632679),
+        targetPosition=random.uniform(-numpy.pi/2, numpy.pi/2),
         maxForce=25
     )
     pyrosim.Set_Motor_For_Joint(
         bodyIndex=robotId,
         jointName="Torso_FrontLeg",
         controlMode=p.POSITION_CONTROL,
-        targetPosition=random.uniform(-1.57079632679,1.57079632679),
+        targetPosition=random.uniform(-numpy.pi/2, numpy.pi/2),
         maxForce=25
     )
     time.sleep(1 / 60)
