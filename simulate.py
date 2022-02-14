@@ -18,17 +18,35 @@ robotId = p.loadURDF("body.urdf")
 # used to simulate sensors
 pyrosim.Prepare_To_Simulate(robotId)
 
+# variables for robot
+backLegAmplitude = numpy.pi / 4
+backLegFrequency = 10
+backLegPhaseOffset = numpy.pi/4
+frontLegAmplitude = numpy.pi / 4
+frontLegFrequency = 10
+frontLegPhaseOffset = 0
+
 # vector for backleg sensor values
 backLegSensorValues = numpy.zeros(1000)
 
 # vector for frontleg sensor values
 frontLegSensorValues = numpy.zeros(1000)
 
-targetAngles = numpy.linspace(0, 2*numpy.pi, 1000)
-targetAngles = numpy.sin(targetAngles)*(numpy.pi/4)
-numpy.save("../mybot/data/targetAngles.npy", targetAngles)
+# vector for target angles of back leg to be used by robot
+backLegTargetAngles = numpy.linspace(0, 2 * numpy.pi, 1000)
+for x in range(len(backLegTargetAngles)):
+    backLegTargetAngles[x] = backLegAmplitude * numpy.sin(backLegFrequency *
+                                                          backLegTargetAngles[x] + backLegPhaseOffset)
+# numpy.save("../mybot/data/backLegTargetAngles.npy", backLegTargetAngles)
 
-exit()
+# vector fot target angles of front leg to be used by robot
+frontLegTargetAngles = numpy.linspace(0, 2 * numpy.pi, 1000)
+for x in range(len(frontLegTargetAngles)):
+    frontLegTargetAngles[x] = frontLegAmplitude * numpy.sin(frontLegFrequency *
+                                                            frontLegTargetAngles[x] + frontLegPhaseOffset)
+# numpy.save("../mybot/data/frontLegTargetAngles.npy", frontLegTargetAngles)
+# exit()
+
 # for loop to make simulation last longer
 for i in range(1000):
     p.stepSimulation()
@@ -38,14 +56,14 @@ for i in range(1000):
         bodyIndex=robotId,
         jointName="Torso_BackLeg",
         controlMode=p.POSITION_CONTROL,
-        targetPosition=random.uniform(-numpy.pi/2, numpy.pi/2),
+        targetPosition=backLegTargetAngles[i],
         maxForce=25
     )
     pyrosim.Set_Motor_For_Joint(
         bodyIndex=robotId,
         jointName="Torso_FrontLeg",
         controlMode=p.POSITION_CONTROL,
-        targetPosition=random.uniform(-numpy.pi/2, numpy.pi/2),
+        targetPosition=frontLegTargetAngles[i],
         maxForce=25
     )
     time.sleep(1 / 60)
