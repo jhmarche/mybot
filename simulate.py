@@ -20,10 +20,10 @@ pyrosim.Prepare_To_Simulate(robotId)
 
 # variables for robot
 backLegAmplitude = numpy.pi / 4
-backLegFrequency = 10
-backLegPhaseOffset = numpy.pi/4
+backLegFrequency = 5
+backLegPhaseOffset = 0
 frontLegAmplitude = numpy.pi / 4
-frontLegFrequency = 10
+frontLegFrequency = 5
 frontLegPhaseOffset = 0
 
 # vector for backleg sensor values
@@ -57,14 +57,14 @@ for i in range(1000):
         jointName="Torso_BackLeg",
         controlMode=p.POSITION_CONTROL,
         targetPosition=backLegTargetAngles[i],
-        maxForce=25
+        maxForce=10
     )
     pyrosim.Set_Motor_For_Joint(
         bodyIndex=robotId,
         jointName="Torso_FrontLeg",
         controlMode=p.POSITION_CONTROL,
         targetPosition=frontLegTargetAngles[i],
-        maxForce=25
+        maxForce=10
     )
     time.sleep(1 / 60)
 
