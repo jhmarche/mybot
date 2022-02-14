@@ -24,7 +24,8 @@ backLegSensorValues = numpy.zeros(1000)
 # vector for frontleg sensor values
 frontLegSensorValues = numpy.zeros(1000)
 
-targetAngles = numpy.linspace(0, 2*numpy.pi, 1001)
+targetAngles = numpy.linspace(0, 2*numpy.pi, 1000)
+targetAngles = numpy.sin(targetAngles)*(numpy.pi/4)
 numpy.save("../mybot/data/targetAngles.npy", targetAngles)
 
 exit()
