@@ -3,12 +3,13 @@ import time
 import pybullet_data
 import pyrosim.pyrosim as pyrosim
 import numpy
+import constants as c
 import random
 
 physicsClient = p.connect(p.GUI)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
 
-p.setGravity(0, 0, -9.8)
+p.setGravity(c.ZERO, c.ZERO, -9.8)
 # reads in world described in box.sdf
 p.loadSDF("world.sdf")
 planeId = p.loadURDF("plane.urdf")
@@ -19,28 +20,28 @@ robotId = p.loadURDF("body.urdf")
 pyrosim.Prepare_To_Simulate(robotId)
 
 # variables for robot
-backLegAmplitude = numpy.pi / 4
-backLegFrequency = 5
-backLegPhaseOffset = 0
-frontLegAmplitude = numpy.pi / 4
-frontLegFrequency = 5
-frontLegPhaseOffset = 0
+backLegAmplitude = c.PI_OVER_FOUR
+backLegFrequency = c.FIVE
+backLegPhaseOffset = c.ZERO
+frontLegAmplitude = c.PI_OVER_FOUR
+frontLegFrequency = c.FIVE
+frontLegPhaseOffset = c.ZERO
 
 # vector for backleg sensor values
-backLegSensorValues = numpy.zeros(1000)
+backLegSensorValues = numpy.zeros(c.ITERATIONS)
 
 # vector for frontleg sensor values
-frontLegSensorValues = numpy.zeros(1000)
+frontLegSensorValues = numpy.zeros(c.ITERATIONS)
 
 # vector for target angles of back leg to be used by robot
-backLegTargetAngles = numpy.linspace(0, 2 * numpy.pi, 1000)
+backLegTargetAngles = numpy.linspace(c.ZERO, c.TWO_PI, c.ITERATIONS)
 for x in range(len(backLegTargetAngles)):
     backLegTargetAngles[x] = backLegAmplitude * numpy.sin(backLegFrequency *
                                                           backLegTargetAngles[x] + backLegPhaseOffset)
 # numpy.save("../mybot/data/backLegTargetAngles.npy", backLegTargetAngles)
 
 # vector fot target angles of front leg to be used by robot
-frontLegTargetAngles = numpy.linspace(0, 2 * numpy.pi, 1000)
+frontLegTargetAngles = numpy.linspace(c.ZERO, c.TWO_PI, c.ITERATIONS)
 for x in range(len(frontLegTargetAngles)):
     frontLegTargetAngles[x] = frontLegAmplitude * numpy.sin(frontLegFrequency *
                                                             frontLegTargetAngles[x] + frontLegPhaseOffset)
@@ -48,7 +49,7 @@ for x in range(len(frontLegTargetAngles)):
 # exit()
 
 # for loop to make simulation last longer
-for i in range(1000):
+for i in range(c.ITERATIONS):
     p.stepSimulation()
     backLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
     frontLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
@@ -57,16 +58,16 @@ for i in range(1000):
         jointName="Torso_BackLeg",
         controlMode=p.POSITION_CONTROL,
         targetPosition=backLegTargetAngles[i],
-        maxForce=10
+        maxForce=c.TEN
     )
     pyrosim.Set_Motor_For_Joint(
         bodyIndex=robotId,
         jointName="Torso_FrontLeg",
         controlMode=p.POSITION_CONTROL,
         targetPosition=frontLegTargetAngles[i],
-        maxForce=10
+        maxForce=c.TEN
     )
-    time.sleep(1 / 60)
+    time.sleep(c.SLEEP)
 
 p.disconnect()
 
