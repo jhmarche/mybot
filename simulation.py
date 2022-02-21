@@ -11,7 +11,7 @@ class SIMULATION:
     def __init__(self):
         self.physicsClient = p.connect(p.GUI)
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
-        p.setGravity(c.ZERO, c.ZERO, -9.8)
+        p.setGravity(0, 0, -9.8)
         self.world = WORLD()
         self.robot = ROBOT()
 
@@ -23,6 +23,7 @@ class SIMULATION:
             print(t)
             p.stepSimulation()
             self.robot.Sense(t)
+            self.robot.ACT(t)
             #     pyrosim.Set_Motor_For_Joint(
             #         bodyIndex=robotId,
             #         jointName="Torso_BackLeg",
