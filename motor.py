@@ -26,3 +26,6 @@ class MOTOR:
             targetPosition=self.motorValues[t],
             maxForce=c.TEN
         )
+
+    def Save_Values(self):
+        numpy.save("../mybot/data/motorValues.npy", self.motorValues)
