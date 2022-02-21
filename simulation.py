@@ -6,11 +6,35 @@ import time
 import pybullet_data
 import pyrosim.pyrosim as pyrosim
 
+
 class SIMULATION:
     def __init__(self):
         self.physicsClient = p.connect(p.GUI)
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
+        p.setGravity(c.ZERO, c.ZERO, -9.8)
         self.world = WORLD()
         self.robot = ROBOT()
-        p.setGravity(c.ZERO, c.ZERO, -9.8)
-        pyrosim.Prepare_To_Simulate(self.robot)
+
+    def __del__(self):
+        p.disconnect()
+
+    def Run(self):
+        for t in range(c.ITERATIONS):
+            print(t)
+            p.stepSimulation()
+            self.robot.Sense(t)
+            #     pyrosim.Set_Motor_For_Joint(
+            #         bodyIndex=robotId,
+            #         jointName="Torso_BackLeg",
+            #         controlMode=p.POSITION_CONTROL,
+            #         targetPosition=backLegTargetAngles[i],
+            #         maxForce=c.TEN
+            #     )
+            #     pyrosim.Set_Motor_For_Joint(
+            #         bodyIndex=robotId,
+            #         jointName="Torso_FrontLeg",
+            #         controlMode=p.POSITION_CONTROL,
+            #         targetPosition=frontLegTargetAngles[i],
+            #         maxForce=c.TEN
+            #     )
+            time.sleep(c.SLEEP)
