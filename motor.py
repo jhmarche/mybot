@@ -14,6 +14,9 @@ class MOTOR:
         self.frequency = c.FREQUENCY
         self.offset = c.OFFSET
         self.motorValues = numpy.linspace(c.OFFSET, c.TWO_PI, c.ITERATIONS)
+        if self.jointName == "Torso_FrontLeg":
+            self.frequency = c.FREQUENCY / 2
+
         for x in range(len(self.motorValues)):
             self.motorValues[x] = self.amplitude * numpy.sin(self.frequency *
                                                              self.motorValues[x] + self.offset)

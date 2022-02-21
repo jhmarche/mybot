@@ -38,4 +38,4 @@ class SIMULATION:
             #         targetPosition=frontLegTargetAngles[i],
             #         maxForce=c.TEN
             #     )
-            time.sleep(c.SLEEP)
+            time.sleep(1/60)
