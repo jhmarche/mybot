@@ -20,22 +20,9 @@ class SIMULATION:
 
     def Run(self):
         for t in range(c.ITERATIONS):
-            print(t)
+            #print(t)
             p.stepSimulation()
             self.robot.Sense(t)
+            self.robot.Think()
             self.robot.ACT(t)
-            #     pyrosim.Set_Motor_For_Joint(
-            #         bodyIndex=robotId,
-            #         jointName="Torso_BackLeg",
-            #         controlMode=p.POSITION_CONTROL,
-            #         targetPosition=backLegTargetAngles[i],
-            #         maxForce=c.TEN
-            #     )
-            #     pyrosim.Set_Motor_For_Joint(
-            #         bodyIndex=robotId,
-            #         jointName="Torso_FrontLeg",
-            #         controlMode=p.POSITION_CONTROL,
-            #         targetPosition=frontLegTargetAngles[i],
-            #         maxForce=c.TEN
-            #     )
             time.sleep(1/60)
