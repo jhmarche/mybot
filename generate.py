@@ -47,6 +47,12 @@ def Generate_Brain():
     # create a neuron for torso
     pyrosim.Send_Sensor_Neuron(name=0, linkName="Torso")
 
+    # create a neuron for back leg
+    pyrosim.Send_Sensor_Neuron(name=1, linkName="BackLeg")
+
+    # create a neuron for front leg
+    pyrosim.Send_Sensor_Neuron(name=2, linkName="FrontLeg")
+
     # stop pyrosim
     pyrosim.End()
 
