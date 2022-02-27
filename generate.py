@@ -1,8 +1,8 @@
 import pyrosim.pyrosim as pyrosim
 
 
-# function to create the world
-def create_world():
+# function to create world
+def Generate_World():
     # file to store information about world
     pyrosim.Start_SDF("world.sdf")
 
@@ -13,8 +13,8 @@ def create_world():
     pyrosim.End()
 
 
-# function to create a robot
-def create_robot():
+# function to create body of robot
+def Generate_Body():
     # file to store body of robot
     pyrosim.Start_URDF("body.urdf")
 
@@ -39,8 +39,20 @@ def create_robot():
     pyrosim.End()
 
 
-# create the world
-create_world()
+# function to create brain of robot
+def Generate_Brain():
+    # file to store brain of robot
+    pyrosim.Start_NeuralNetwork("brain.nndf")
 
-# create the robot in the world
-create_robot()
+    # create a neuron for torso
+    pyrosim.Send_Sensor_Neuron(name=0, linkName="Torso")
+
+    # stop pyrosim
+    pyrosim.End()
+
+
+Generate_World()
+
+Generate_Body()
+
+Generate_Brain()
