@@ -59,6 +59,9 @@ def Generate_Brain():
     # create neuron for torso/front leg motor
     pyrosim.Send_Motor_Neuron(name=4, jointName="Torso_FrontLeg")
 
+    # create a synapse from neuron 0 to neuron 3
+    pyrosim.Send_Synapse(sourceNeuronName=0, targetNeuronName=3, weight=1.0)
+
     # stop pyrosim
     pyrosim.End()
 
