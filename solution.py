@@ -13,6 +13,9 @@ class SOLUTION:
         self.Generate_Body()
         self.Generate_Brain()
         os.system("python3 simulate.py")
+        f = open("fitness.txt", "r")
+        self.fitness = float(f.read())
+        f.close()
 
     # function to create world
     def Generate_World(self):
