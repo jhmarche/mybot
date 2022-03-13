@@ -1,4 +1,5 @@
 import pyrosim.pyrosim as pyrosim
+import random
 
 
 # function to create world
@@ -59,18 +60,11 @@ def Generate_Brain():
     # create neuron for torso/front leg motor
     pyrosim.Send_Motor_Neuron(name=4, jointName="Torso_FrontLeg")
 
-    # create a synapse from neuron 0 to neuron 3
-    pyrosim.Send_Synapse(sourceNeuronName=0, targetNeuronName=3, weight=-1.0)
-
-    # create a synapse from neuron 1 to neuron 3
-    pyrosim.Send_Synapse(sourceNeuronName=2, targetNeuronName=3, weight=-1.0)
-
-    # create a synapse from neuron 0 to 4
-    pyrosim.Send_Synapse(sourceNeuronName=0, targetNeuronName=4, weight=-1.0)
-
-    # create a synapse from neuron 2 to 4
-    pyrosim.Send_Synapse(sourceNeuronName=2, targetNeuronName=4, weight=-1.0)
-
+    # nested for loops that creates a synapse from each neuron to each motor
+    for i in range(3):
+        for j in range(2):
+            motor = j + 3
+            pyrosim.Send_Synapse(sourceNeuronName=i, targetNeuronName=motor, weight=random.uniform(-1.0, 1.0))
 
     # stop pyrosim
     pyrosim.End()
