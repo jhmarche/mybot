@@ -7,4 +7,4 @@ TEN = 10
 SLEEP = 1/60
 TWO_PI = 2 * numpy.pi
 AMPLITUDE = numpy.pi / 4
-numberOfGenerations = 2
+numberOfGenerations = 10
