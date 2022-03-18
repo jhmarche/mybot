@@ -5,9 +5,10 @@ import os
 
 
 class SOLUTION:
-    def __init__(self):
+    def __init__(self, nextAvailableID):
         self.weights = numpy.random.rand(3, 2)
         self.weights = self.weights * 2 - 1
+        self.myID = nextAvailableID
 
     def Evaluate(self, directOrGUI):
         self.Generate_World()
@@ -23,6 +24,9 @@ class SOLUTION:
         randomRow = random.randint(0, 2)
         randomColumn = random.randint(0, 1)
         self.weights[randomRow, randomColumn] = random.random() * 2 - 1
+
+    def Set_ID(self, nextAvailableID):
+        self.myID = nextAvailableID
 
     # function to create world
     def Generate_World(self):
