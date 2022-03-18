@@ -11,20 +11,6 @@ class SOLUTION:
         self.weights = self.weights * 2 - 1
         self.myID = nextAvailableID
 
-    def Evaluate(self, directOrGUI):
-        self.Generate_World()
-        self.Generate_Body()
-        self.Generate_Brain()
-        os.system("python3 simulate.py " + directOrGUI + " " + str(self.myID) + " &")
-        os.system(" start /B python3 simulate.py " + directOrGUI + str(self.myID))
-        fitnessFileName="fitness" + str(self.myID) + ".txt"
-        while not os.path.exists(fitnessFileName):
-            time.sleep(0.01)
-        f = open("fitness"+str(self.myID)+".txt", "r")
-        self.fitness = float(f.read())
-        print(self.fitness)
-        f.close()
-
     def Start_Simulation(self, directOrGUI):
         self.Generate_World()
         self.Generate_Body()
