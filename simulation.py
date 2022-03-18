@@ -17,6 +17,7 @@ class SIMULATION:
         p.setGravity(0, 0, -9.8)
         self.world = WORLD()
         self.robot = ROBOT()
+        self.directOrGui = directOrGUI
 
     def __del__(self):
         p.disconnect()
@@ -27,7 +28,8 @@ class SIMULATION:
             self.robot.Sense(t)
             self.robot.Think()
             self.robot.ACT()
-            time.sleep(1/60)
+            if self.directOrGui == "GUI":
+                time.sleep(1/60)
 
     def Get_Fitness(self):
         self.robot.Get_Fitness()
