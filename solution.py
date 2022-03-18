@@ -14,8 +14,8 @@ class SOLUTION:
         self.Generate_World()
         self.Generate_Body()
         self.Generate_Brain()
-        os.system("python3 simulate.py " + directOrGUI + "&")
-        os.system("start /B python3 simulate.py " + directOrGUI)
+        os.system("python3 simulate.py " + directOrGUI + " " + str(self.myID) + " &")
+        os.system(" start /B python3 simulate.py " + directOrGUI + str(self.myID))
         f = open("fitness.txt", "r")
         self.fitness = float(f.read())
         f.close()
@@ -67,7 +67,7 @@ class SOLUTION:
     # function to create brain of robot
     def Generate_Brain(self):
         # file to store brain of robot
-        pyrosim.Start_NeuralNetwork("brain.nndf")
+        pyrosim.Start_NeuralNetwork("brain" + str(self.myID) + ".nndf")
 
         # create a neuron for torso
         pyrosim.Send_Sensor_Neuron(name=0, linkName="Torso")
