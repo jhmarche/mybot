@@ -31,5 +31,5 @@ class SIMULATION:
             if self.directOrGui == "GUI":
                 time.sleep(1/60)
 
-    def Get_Fitness(self):
-        self.robot.Get_Fitness()
+    def Get_Fitness(self, solutionID):
+        self.robot.Get_Fitness(solutionID)
