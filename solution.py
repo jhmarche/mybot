@@ -23,9 +23,13 @@ class SOLUTION:
         while not os.path.exists(fitnessFileName):
             time.sleep(0.01)
         f = open("fitness" + str(self.myID) + ".txt", "r")
-        self.fitness = float(f.read())
-        f.close()
+        my_string = f.read()
+        while my_string == '':
+            my_string = f.read()
+            time.sleep(0.01)
+        self.fitness = float(my_string)
         os.system("rm fitness" + str(self.myID) + ".txt")
+        f.close()
 
     def Mutate(self):
         randomRow = random.randint(0, 2)
