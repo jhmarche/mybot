@@ -3,11 +3,12 @@ import pyrosim.pyrosim as pyrosim
 import random
 import os
 import time
+import constants as c
 
 
 class SOLUTION:
     def __init__(self, nextAvailableID):
-        self.weights = numpy.random.rand(3, 2)
+        self.weights = numpy.random.rand(c.numSensorNeurons, c.numMotorNeurons)
         self.weights = self.weights * 2 - 1
         self.myID = nextAvailableID
 
@@ -32,8 +33,8 @@ class SOLUTION:
         f.close()
 
     def Mutate(self):
-        randomRow = random.randint(0, 2)
-        randomColumn = random.randint(0, 1)
+        randomRow = random.randint(0, c.numSensorNeurons-1)
+        randomColumn = random.randint(0, c.numMotorNeurons-1)
         self.weights[randomRow, randomColumn] = random.random() * 2 - 1
 
     def Set_ID(self, nextAvailableID):
@@ -96,9 +97,9 @@ class SOLUTION:
         pyrosim.Send_Motor_Neuron(name=4, jointName="Torso_FrontLeg")
 
         # nested for loops that creates a synapse from each neuron to each motor
-        for currentRow in range(3):
-            for currentColumn in range(2):
-                pyrosim.Send_Synapse(sourceNeuronName=currentRow, targetNeuronName=currentColumn + 3,
+        for currentRow in range(c.numSensorNeurons):
+            for currentColumn in range(c.numMotorNeurons):
+                pyrosim.Send_Synapse(sourceNeuronName=currentRow, targetNeuronName=currentColumn + c.numSensorNeurons,
                                      weight=self.weights[currentRow][currentColumn])
 
         # stop pyrosim
