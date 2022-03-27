@@ -68,10 +68,10 @@ class SOLUTION:
 
         # create a second joint for torso and front leg
         pyrosim.Send_Joint(name="Torso_FrontLeg", parent="Torso", child="FrontLeg",
-                           type="revolute", position=[1.5, 0, 1])
+                           type="revolute", position=[0, 0.5, 1])
 
         # create front leg
-        pyrosim.Send_Cube(name="FrontLeg", pos=[0.5, 0, -0.5], size=[1, 1, 1])
+        pyrosim.Send_Cube(name="FrontLeg", pos=[0, 0.5, 0], size=[0.2, 1, 0.2])
 
         # stop pyrosim
         pyrosim.End()
