@@ -57,7 +57,7 @@ class SOLUTION:
         pyrosim.Start_URDF("body.urdf")
 
         # create a Torso
-        pyrosim.Send_Cube(name="Torso", pos=[1, 0, 1.5], size=[1, 1, 1])
+        pyrosim.Send_Cube(name="Torso", pos=[0, 0, 1], size=[1, 1, 1])
 
         # create a joint for BackLeg and Torso
         pyrosim.Send_Joint(name="Torso_BackLeg", parent="Torso", child="BackLeg",
