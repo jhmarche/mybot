@@ -132,11 +132,47 @@ class SOLUTION:
         # create a neuron for front leg
         pyrosim.Send_Sensor_Neuron(name=2, linkName="FrontLeg")
 
+        # create a neuron for torso
+        pyrosim.Send_Sensor_Neuron(name=3, linkName="LeftLeg")
+
+        # create a neuron for back leg
+        pyrosim.Send_Sensor_Neuron(name=4, linkName="RightLeg")
+
+        # create a neuron for back leg
+        pyrosim.Send_Sensor_Neuron(name=5, linkName="BackLowerLeg")
+
+        # create a neuron for front leg
+        pyrosim.Send_Sensor_Neuron(name=6, linkName="FrontLowerLeg")
+
+        # create a neuron for torso
+        pyrosim.Send_Sensor_Neuron(name=7, linkName="LeftLowerLeg")
+
+        # create a neuron for back leg
+        pyrosim.Send_Sensor_Neuron(name=8, linkName="RightLowerLeg")
+
         # create neuron for torso/back leg motor
-        pyrosim.Send_Motor_Neuron(name=3, jointName="Torso_BackLeg")
+        pyrosim.Send_Motor_Neuron(name=9, jointName="Torso_BackLeg")
 
         # create neuron for torso/front leg motor
-        pyrosim.Send_Motor_Neuron(name=4, jointName="Torso_FrontLeg")
+        pyrosim.Send_Motor_Neuron(name=10, jointName="Torso_FrontLeg")
+
+        # create neuron for torso/back leg motor
+        pyrosim.Send_Motor_Neuron(name=11, jointName="Torso_LeftLeg")
+
+        # create neuron for torso/front leg motor
+        pyrosim.Send_Motor_Neuron(name=12, jointName="Torso_RightLeg")
+
+        # create neuron for torso/back leg motor
+        pyrosim.Send_Motor_Neuron(name=13, jointName="BackLeg_BackLowerLeg")
+
+        # create neuron for torso/front leg motor
+        pyrosim.Send_Motor_Neuron(name=14, jointName="FrontLeg_FrontLowerLeg")
+
+        # create neuron for torso/back leg motor
+        pyrosim.Send_Motor_Neuron(name=15, jointName="LeftLeg_LeftLowerLeg")
+
+        # create neuron for torso/front leg motor
+        pyrosim.Send_Motor_Neuron(name=16, jointName="RightLeg_RightLowerLeg")
 
         # nested for loops that creates a synapse from each neuron to each motor
         for currentRow in range(c.numSensorNeurons):
