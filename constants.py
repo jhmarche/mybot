@@ -9,5 +9,5 @@ TWO_PI = 2 * numpy.pi
 AMPLITUDE = numpy.pi / 4
 numberOfGenerations = 1
 populationSize = 1
-numSensorNeurons = 3
-numMotorNeurons = 2
+numSensorNeurons = 4
+numMotorNeurons = 3

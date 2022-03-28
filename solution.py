@@ -73,6 +73,13 @@ class SOLUTION:
         # create front leg
         pyrosim.Send_Cube(name="FrontLeg", pos=[0, 0.5, 0], size=[0.2, 1, 0.2])
 
+        # create a joint for BackLeg and Torso
+        pyrosim.Send_Joint(name="Torso_LeftLeg", parent="Torso", child="LeftLeg",
+                           type="revolute", position=[-0.5, 0, 1], jointAxis="0 1 0")
+
+        # create a BackLeg
+        pyrosim.Send_Cube(name="LeftLeg", pos=[-0.5, 0, 0], size=[1.0, 0.2, 0.2])
+
         # stop pyrosim
         pyrosim.End()
 
