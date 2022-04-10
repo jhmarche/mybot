@@ -5,7 +5,8 @@ import pyrosim.pyrosim as pyrosim
 from pyrosim.neuralNetwork import NEURAL_NETWORK
 import os
 import constants as c
-
+import numpy
+import random
 
 class ROBOT:
     def __init__(self, solutionID):
@@ -42,10 +43,10 @@ class ROBOT:
         self.nn.Update()
 
     def Get_Fitness(self, solutionID):
-        stateOfLinkZero = p.getLinkState(self.robotId, 0)
-        positionOfLinkZero = stateOfLinkZero[0]
-        xCoordinateOfLinkZero = positionOfLinkZero[0]
-        f = open("tmp"+str(solutionID)+".txt", "w")
-        os.system("mv tmp"+str(solutionID)+".txt fitness"+str(solutionID)+".txt")
-        f.write(str(xCoordinateOfLinkZero))
+        basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
+        basePosition = basePositionAndOrientation[0]
+        xPosition = basePosition[0]
+        f = open("tmp" + str(solutionID) + ".txt", "w")
+        os.system("mv tmp" + str(solutionID) + ".txt fitness" + str(solutionID) + ".txt")
+        f.write(str(xPosition))
         f.close()
