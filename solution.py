@@ -43,7 +43,7 @@ class SOLUTION:
     # function to create world
     def Generate_World(self):
         # file to store information about world
-        pyrosim.Start_SDF("world.sdf")
+        pyrosim.Start_SDF("world" + str(self.myID) + ".sdf")
 
         # creates a box
         pyrosim.Send_Cube(name="Box", pos=[-3, 3, 0.5], size=[1, 1, 1])
@@ -54,7 +54,7 @@ class SOLUTION:
     # function to create body of robot
     def Generate_Body(self):
         # file to store body of robot
-        pyrosim.Start_URDF("body.urdf")
+        pyrosim.Start_URDF("body" + str(self.myID) + ".urdf")
 
         # create a Torso
         pyrosim.Send_Cube(name="Torso", pos=[0, 0, 1], size=[1, 1, 1])

@@ -15,6 +15,8 @@ class ROBOT:
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
         os.system("rm brain" + str(solutionID) + ".nndf")
+        os.system("rm body" + str(solutionID) + ".urdf")
+        os.system("rm world" + str(solutionID) + ".sdf")
 
     def Prepare_To_Sense(self):
         self.sensors = {}
@@ -44,8 +46,8 @@ class ROBOT:
     def Get_Fitness(self, solutionID):
         basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
         basePosition = basePositionAndOrientation[0]
-        xPosition = basePosition[0]
+        zPosition = basePosition[2]
         f = open("tmp" + str(solutionID) + ".txt", "w")
         os.system("mv tmp" + str(solutionID) + ".txt fitness" + str(solutionID) + ".txt")
-        f.write(str(xPosition))
+        f.write(str(zPosition))
         f.close()
