@@ -2,6 +2,7 @@ from solution import SOLUTION
 import constants as c
 import copy
 import os
+import numpy
 
 
 class PARALLEL_HILL_CLIMBER:
@@ -10,6 +11,7 @@ class PARALLEL_HILL_CLIMBER:
         os.system("rm fitness*.txt")
         self.parents = {}
         self.nextAvailableID = 0
+        self.matrix = numpy.zeros((c.populationSize, c.numberOfGenerations))
         for x in range(c.populationSize):
             new_solution = SOLUTION(self.nextAvailableID)
             self.nextAvailableID += 1
@@ -19,6 +21,8 @@ class PARALLEL_HILL_CLIMBER:
         self.Evaluate(self.parents)
         for currentGeneration in range(c.numberOfGenerations):
             self.Evolve_For_One_Generation()
+            for i in range(c.populationSize):
+                self.matrix[i][currentGeneration] = self.parents[i].fitness
 
     def Evolve_For_One_Generation(self):
         self.Spawn()
@@ -59,4 +63,5 @@ class PARALLEL_HILL_CLIMBER:
             parent.Start_Simulation("DIRECT")
         for parent in solutions.values():
             parent.Wait_For_Simulation_To_End()
+        numpy.savetxt("Test.txt", self.matrix)
 
